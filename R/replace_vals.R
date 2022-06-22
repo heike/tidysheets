@@ -8,7 +8,9 @@
 #' are replaced 1-1, i.e. the ith value in values is replaced by the ith value in labels
 #' @export
 replace_vals <- function(x, values, labels) {
-  stopifnot(length(values) == length(labels), class(x) == class(values))
+  stopifnot(length(values) == length(labels))
+# classes of values and x should be compatible:
+  stopifnot(any(values %in% unique(x)))
 
   for (i in 1:length(values)) {
     x <- replace(x, which(x == values[i]), labels[i])
